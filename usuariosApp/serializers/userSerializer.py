@@ -40,7 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
                 'telefono': familiar.telefono,
                 'genero': familiar.genero,
                 'parentesco': familiar.parentesco,
-                'email': familiar.email,
+                'email': familiar.email
             },
             'medico': {
                 'id': medico.id,
@@ -49,6 +49,6 @@ class UserSerializer(serializers.ModelSerializer):
                 'telefono': medico.telefono,
                 'genero': medico.genero,
                 'especialidad': medico.especialidad,
-                'registro': medico.registro,
+                'registro': medico.registro
             }
         }
