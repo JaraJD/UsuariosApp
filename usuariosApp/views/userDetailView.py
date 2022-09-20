@@ -3,6 +3,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.backends import TokenBackend
 from rest_framework.permissions import IsAuthenticated
+
 from usuariosApp.models.user import User
 from usuariosApp.serializers.userSerializer import UserSerializer
 
