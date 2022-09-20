@@ -5,10 +5,10 @@ from usuariosApp.models.medico import Medico
 from usuariosApp.models.account import Account
 from usuariosApp.serializers.familiarSerializer import FamiliarSerializer
 from usuariosApp.serializers.medicoSerializer import MedicoSerializer
+from usuariosApp.serializers.accountSerializer import AccountSerializer
 
 class UserSerializer(serializers.ModelSerializer):
-    familiar = FamiliarSerializer()
-    medico = MedicoSerializer()
+    account = AccountSerializer()
     class Meta:
         model = User
         fields = ['id', 'username', 'password', 'name', 'email', 'account']
