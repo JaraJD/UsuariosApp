@@ -14,12 +14,15 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         familiarData = validated_data.pop('familiar')
-        medicoData = validated_data.pop('medico')
         userInstance = User.objects.create(**validated_data)
         Familiar.objects.create(user=userInstance, **familiarData)
+        return userInstance
+
+    def create(self, validated_data):
+        medicoData = validated_data.pop('medico')
+        userInstance = User.objects.create(**validated_data)
         Medico.objects.create(user=userInstance, **medicoData)
         return userInstance
-        
 
     def to_representation(self, obj):
         user = User.objects.get(id=obj.id)
@@ -37,7 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
                 'telefono': familiar.telefono,
                 'genero': familiar.genero,
                 'parentesco': familiar.parentesco,
-                'email': familiar.email
+                'email': familiar.email,
             },
             'medico': {
                 'id': medico.id,
@@ -46,6 +49,6 @@ class UserSerializer(serializers.ModelSerializer):
                 'telefono': medico.telefono,
                 'genero': medico.genero,
                 'especialidad': medico.especialidad,
-                'registro': medico.registro
+                'registro': medico.registro,
             }
         }
