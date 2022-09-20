@@ -10,18 +10,11 @@ class UserSerializer(serializers.ModelSerializer):
     medico = MedicoSerializer()
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'name', 'email', 'familiar', 'medico']
+        fields = ['id', 'username', 'password', 'name', 'email']
 
     def create(self, validated_data):
-        familiarData = validated_data.pop('familiar')
         userInstance = User.objects.create(**validated_data)
-        Familiar.objects.create(user=userInstance, **familiarData)
-        return userInstance
-
-    def create(self, validated_data):
-        medicoData = validated_data.pop('medico')
-        userInstance = User.objects.create(**validated_data)
-        Medico.objects.create(user=userInstance, **medicoData)
+        Medico.objects.create(user=userInstance)
         return userInstance
 
     def to_representation(self, obj):
@@ -32,23 +25,5 @@ class UserSerializer(serializers.ModelSerializer):
             'id': user.id,
             'username': user.username,
             'name': user.name,
-            'email': user.email,
-            'familiar': {
-                'id': familiar.id,
-                'nombre': familiar.nombre,
-                'apellido': familiar.apellido,
-                'telefono': familiar.telefono,
-                'genero': familiar.genero,
-                'parentesco': familiar.parentesco,
-                'email': familiar.email,
-            },
-            'medico': {
-                'id': medico.id,
-                'nombre': medico.nombre,
-                'apellido': medico.apellido,
-                'telefono': medico.telefono,
-                'genero': medico.genero,
-                'especialidad': medico.especialidad,
-                'registro': medico.registro,
-            }
+            'email': user.email
         }
