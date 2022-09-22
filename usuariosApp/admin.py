@@ -7,4 +7,3 @@ admin.site.register(User)
 admin.site.register(Familiar)
 admin.site.register(Medico)
 
-# Register your models here.
