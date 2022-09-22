@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-hfv9jtqhc8dgxhuu%9!wi#p*flef9jh(e8ft*dchr50#k_qek&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -101,10 +101,10 @@ WSGI_APPLICATION = 'usuariosProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbrs3cv881an4m',
-        'USER': 'drjygwhcipnczt',
-        'PASSWORD': 'c0e71ec545644233105bc95805b70637218db74b41f84c7b3ef9d1c2d411f5f5',
-        'HOST': 'ec2-3-229-165-146.compute-1.amazonaws.com',
+        'NAME': 'd4eabr8edcq7m9',
+        'USER': 'fnvlxiomitqxys',
+        'PASSWORD': 'df85fce247fc4f2771a37659aae6290ac78ea396f666f18774658801ffef95b2',
+        'HOST': 'ec2-52-207-90-231.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }

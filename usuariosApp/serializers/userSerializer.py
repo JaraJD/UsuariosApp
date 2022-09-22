@@ -2,33 +2,49 @@ from rest_framework import serializers
 from usuariosApp.models.user import User
 from usuariosApp.models.familiar import Familiar
 from usuariosApp.models.medico import Medico
-from usuariosApp.models.account import Account
 from usuariosApp.serializers.familiarSerializer import FamiliarSerializer
 from usuariosApp.serializers.medicoSerializer import MedicoSerializer
-from usuariosApp.serializers.accountSerializer import AccountSerializer
 
 class UserSerializer(serializers.ModelSerializer):
-    account = AccountSerializer()
+    familiar = FamiliarSerializer()
+    medico = MedicoSerializer()
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'name', 'email', 'account']
+        fields = ['id', 'username', 'password', 'name', 'email', 'familiar', 'medico']
 
     def create(self, validated_data):
-        accountData = validated_data.pop('account')
+        familiarData = validated_data.pop('familiar')
+        medicoData = validated_data.pop('medico')
         userInstance = User.objects.create(**validated_data)
-        Account.objects.create(user=userInstance, **accountData)
+        Familiar.objects.create(user=userInstance, **familiarData)
+        Medico.objects.create(user=userInstance, **medicoData)
         return userInstance
 
     def to_representation(self, obj):
         user = User.objects.get(id=obj.id)
-        account = Account.objects.get(user=obj.id)
+        familiar = Familiar.objects.get(user=obj.id)
+        medico = Medico.objects.get(user=obj.id)
         return {
             'id': user.id,
             'username': user.username,
             'name': user.name,
             'email': user.email,
-            'account': {
-                'id': account.id,
-                'cargo': account.cargo
+            'familiar': {
+                'id': familiar.id,
+                'nombre': familiar.nombre,
+                'apellido': familiar.apellido,
+                'telefono': familiar.telefono,
+                'genero': familiar.genero,
+                'parentesco': familiar.parentesco,
+                'email': familiar.email,
+            },
+            'medico': {
+                'id': medico.id,
+                'nombre': medico.nombre,
+                'apellido': medico.apellido,
+                'telefono': medico.telefono,
+                'genero': medico.genero,
+                'especialidad': medico.especialidad,
+                'registro': medico.registro,
             }
         }

@@ -1,4 +1,4 @@
-from .accountSerializer import AccountSerializer
+
 from .familiarSerializer import FamiliarSerializer
 from .medicoSerializer import MedicoSerializer
 from .userSerializer import UserSerializer
